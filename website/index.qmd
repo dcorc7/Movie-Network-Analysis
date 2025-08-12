@@ -1,0 +1,79 @@
+---
+title: Classifying Soccer Player Postions Using FIFA Card Statistics
+---
+
+# Introduction
+
+Understanding player roles is fundamental in modern soccer analytics, as they influence scouting decisions, tactical planning, and team building. While traditional positional labels like "defender" or "midfielder" provide a general overview of a player's role, more granular classifications such as "Striker (ST)" or "Right Back (RB)" reveal critical tactical nuances. This project aims to classify soccer players into their on-pitch roles using neural networks trained on player attributes from EA Sports FIFA video game data (FIFA 15–23). Two multi-class classification models were developed: one that assigns players to broad position groups (attacker, midfielder, or defender) and another that classifies them into specific roles, including ST, LW, CM, CB, and others.
+
+# FIFA Card Overview
+
+To illustrate the diversity in player roles and attributes, I am showcasing three FIFA player cards below: Antonio Rüdiger (Center Back), Rodri (Central Defensive Midfielder), and Matheus Cunha (Striker). Each card features a player's base statistics, such as pace, shooting, passing, dribbling, defending, and physicality, which reflect their capabilities on the pitch and serve as input features for the classification models.
+
+**Antonio Rüdiger** represents a central defender (CB). His card shows high defending and physical stats, with relatively lower dribbling and shooting. These traits emphasize his role in halting attacks, winning aerial duels, and maintaining defensive structure.
+
+::: {.columns}
+
+::: {.column width="24%"}
+![Antonio Rüdiger FIFA Card](./img/fifa_cards/rudiger_card_front.avif)
+:::
+
+::: {.column width="1%"}
+&nbsp;
+:::
+
+::: {.column width="75%"}
+![Antonio Rüdiger Full Stats](./img/fifa_cards/rudiger_full_stats.png)
+:::
+
+:::
+
+---
+
+**Rodrigo Hernández Cascante (Rodri)** plays as a central defensive midfielder (CDM). His attributes are more balanced, with solid passing and defending stats, reflecting his dual role as both a disruptor and a deep-lying playmaker who links defense and attack.
+
+::: {.columns}
+
+::: {.column width="24%"}
+![Rodrigo Hernández Cascante Card](./img/fifa_cards/rodri_card_front.avif)
+:::
+
+::: {.column width="1%"}
+&nbsp;
+:::
+
+::: {.column width="75%"}
+![Rodrigo Hernández Cascante Full Stats](./img/fifa_cards/rodri_full_stats.png)
+:::
+
+:::
+
+---
+
+**Matheus Cunha** is a striker (ST), and his card emphasizes pace, dribbling, and shooting. These features highlight his primary role: creating and converting goal-scoring opportunities.
+
+::: {.columns}
+
+::: {.column width="24%"}
+![Matheus Cunha Card Front](./img/fifa_cards/cunha_card_front.avif)
+:::
+
+::: {.column width="1%"}
+&nbsp;
+:::
+
+::: {.column width="75%"}
+![Matheus Cunha Full Stats](./img/fifa_cards/cunha_full_stats.png)
+:::
+
+:::
+
+By comparing the front-facing visuals and detailed attribute breakdowns of these players, we can see how FIFA cards encapsulate tactical roles beyond generic positional labels. Each position tends to have a semi-distinct statistical profile—central defenders like Antonio Rüdiger typically excel in defending and physicality, while contributing less in shooting and dribbling. In contrast, midfielders such as Rodri exhibit more balanced distributions, with notable strength in passing and defensive stats, highlighting their transitional role on the pitch. Strikers like Matheus Cunha tend to have high pace, dribbling, and shooting, reflecting their focus on attacking play.
+
+These role-specific stat distributions make FIFA cards especially well-suited for machine learning classification tasks. The relatively structured and consistent way EA Sports defines attributes across positions introduces a natural signal in the data. This allows models to learn patterns associated with specific roles based on numerical input features such as pace, passing, or strength. While there is variability within positions, the tendencies across broad groups and specific roles provide a strong foundation for supervised learning models to distinguish between roles with a high degree of accuracy. In this project, these characteristics are leveraged to train neural networks that learn to associate attribute patterns with both broad position groups and fine-grained roles.
+
+# Literature Review
+
+# Github Repository
+
+The Github repository hosting all code for this project can be found [here](https://github.com/dcorc7/FIFA-Position-Classifier)

@@ -1,0 +1,27 @@
+---
+title: Methods
+---
+
+This section outlines the methodological framework used to classify FIFA 23 players into position categories using neural networks. The process involved designing and training multi-layer feedforward neural networks on a curated and preprocessed dataset of player attributes. The aim was to build models capable of learning complex patterns in the data and accurately predicting either the **specific** or **generic** on-pitch positions of football players. The methodology emphasizes model design, training strategies, and optimization procedures to ensure generalizability and performance.
+
+
+# Neural Networks
+
+Neural networks are flexible, data-driven models inspired by the structure and functioning of neurons in the human brain. These models consist of layers of interconnected nodes (neurons) that apply transformations to input data through weighted connections and nonlinear activation functions. A typical feedforward neural network comprises an input layer, one or more hidden layers, and an output layer. As data passes through the network, each neuron computes a weighted sum of its inputs, applies an activation function, and sends the result forward.
+
+The network is trained by minimizing a **loss function** that quantifies prediction error. The most common optimization approach, **backpropagation**, is used to compute gradients of the loss with respect to each weight in the network. These gradients are then used to update the weights via gradient descent-based optimizers such as **Adam**, **Stochastic Gradient Descent (SGD)**, or **RMSProp**. By iteratively refining the weights, the model improves its performance on the training data and generalizes to new inputs.
+
+To avoid overfitting, **regularization techniques** were employed, including **dropout**, which randomly disables a fraction of neurons during training, and **early stopping**, which halts training when validation performance plateaus. Manual hyperparameter tuning was conducted to identify the optimal configuration of layers, learning rate, batch size, and optimizer.
+
+## Multi-Class Classification
+
+To classify players into position categories, two separate neural network models were developed:
+
+- One for **generic positions** (Attacker, Midfielder, Defender) with an output layer of 3 neurons
+- One for **specific positions** (CB, LB, RB, CM, LM, RM, ST, LW, RW) with an output layer of 9 neurons
+
+Both models used a final **dense (fully connected) layer** followed by a **softmax activation function**. The softmax function converts the raw output logits into class probabilities that sum to one, enabling a probabilistic interpretation of the model's predictions.
+
+The networks were trained using the **categorical cross-entropy (CCE)** loss function, which is suitable for multi-class classification tasks. Predictions were obtained by taking the **argmax** of the output probability vector—selecting the class with the highest predicted probability.
+
+Throughout training, the choice of optimizer (Adam, SGD, or RMSProp) was based on performance observed during a manual hyperparameter tuning process. Model evaluation focused on both **accuracy** and **generalization**, assessed through performance on a held-out validation set.
