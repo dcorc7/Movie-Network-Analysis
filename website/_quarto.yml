@@ -23,7 +23,7 @@ website:
       - text: Presentation
         href: ./final_presentation.qmd
       - text: Report
-        href: ./final_report.qmd
+        href: ./final_paper.qmd
     right:
       - icon: github
         href: https://github.com/dcorc7
