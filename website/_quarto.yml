@@ -1,6 +1,6 @@
 project:
   type: website
-  output-dir: FIFA-Position-Classifier
+  output-dir: Movie-Network-Analysis
 
 website:
   title: "David Corcoran"
@@ -20,6 +20,10 @@ website:
         href: ./methods.qmd
       - text: Results
         href: ./results.qmd
+      - text: Presentation
+        href: ./final_presentation.qmd
+      - text: Report
+        href: ./final_report.qmd
     right:
       - icon: github
         href: https://github.com/dcorc7

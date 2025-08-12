@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "results.html#graph-attention-networks-gat",
+    "href": "results.html#graph-attention-networks-gat",
+    "title": "Results",
+    "section": "Graph Attention Networks (GAT)",
+    "text": "Graph Attention Networks (GAT)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Predicting Movie Success Using Graph Neural Networks",
+    "section": "",
+    "text": "Introduction\n\n\nLiterature Review\n\n\nGithub Repository\nThe Github repository hosting all code for this project can be found here\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "final_paper.html",
+    "href": "final_paper.html",
+    "title": "Final Paper",
+    "section": "",
+    "text": "Back to top"
+  },
+  {
+    "objectID": "data_collection.html",
+    "href": "data_collection.html",
+    "title": "Data Collection & Preprocessing",
+    "section": "",
+    "text": "Dataset:\n\n\nPreprocessing:\n\n\nNetwork Creation\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "final_presentation.html",
+    "href": "final_presentation.html",
+    "title": "Final Presentation",
+    "section": "",
+    "text": "Back to top"
+  },
+  {
+    "objectID": "methods.html",
+    "href": "methods.html",
+    "title": "Methods",
+    "section": "",
+    "text": "Neural networks are flexible, data-driven models inspired by the structure and functioning of neurons in the human brain. These models consist of layers of interconnected nodes (neurons) that apply transformations to input data through weighted connections and nonlinear activation functions. A typical feedforward neural network comprises an input layer, one or more hidden layers, and an output layer. As data passes through the network, each neuron computes a weighted sum of its inputs, applies an activation function, and sends the result forward.\nThe network is trained by minimizing a loss function that quantifies prediction error. The most common optimization approach, backpropagation, is used to compute gradients of the loss with respect to each weight in the network. These gradients are then used to update the weights via gradient descent-based optimizers such as Adam, Stochastic Gradient Descent (SGD), or **RMSProp. By iteratively refining the weights, the model improves its performance on the training data and generalizes to new inputs.\nTo avoid overfitting, regularization techniques were employed, including dropout, which randomly disables a fraction of neurons during training, and early stopping, which halts training when validation performance plateaus. Manual hyperparameter tuning was conducted to identify the optimal configuration of layers, learning rate, batch size, and optimizer."
+  }
+]

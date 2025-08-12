@@ -1,94 +1,15 @@
 ---
-title: Data & Feature Engineering
+title: Data Collection & Preprocessing
 ---
 
 # Dataset:
 
-The dataset used in this project was sourced from the publicly available FIFA 23 Complete Player Dataset on Kaggle, created by Stefano Leone. This comprehensive dataset spans multiple editions of the FIFA video game series, from FIFA 15 through FIFA 23, and includes detailed information on thousands of players from each game year. Upon initial download, the dataset comprised 161,583 rows and 110 columns, representing a wide array of player data across seasons.
 
-The raw data contains a diverse range of features, including player biographical information (e.g., name, nationality, age, height, weight), game-specific ratings (e.g., overall score, potential), position labels, in-game attributes (e.g., passing accuracy, dribbling, strength, acceleration), and categorical characteristics such as preferred foot, work rate, and body type. Additionally, the dataset includes financial estimations like player value and wage in euros, which help contextualize a player's market standing within the game. Some columns also contain metadata, such as unique player IDs, contract details, and club affiliation.
-
-This rich and multifaceted dataset provides the foundation for training neural networks capable of positional classification. However, before modeling, a thorough data cleaning and preprocessing pipeline was necessary to reduce noise, handle missing or irrelevant entries, and retain only the features relevant to our classification tasks.
-
-The raw dataset can be downloaded [here](https://www.kaggle.com/datasets/stefanoleone992/fifa-23-complete-player-dataset)
 
 
 # Preprocessing:
 
-To prepare the dataset for modeling, a data preprocessing pipeline was implemented to clean and transform the raw FIFA data into an appropriate format for machine learning. Initially, the dataset consisted of 161,583 rows and 110 columns, including a wide mix of metadata, gameplay attributes, and positional information. However, many of these columns were either redundant, unrelated to the classification task, or could potentially leak information about the target labels. For instance, columns like player_positions, nation_position, and various specific in-game ratings for each position (ST, CB, CAM, etc.) explicitly revealed the player’s role and were therefore dropped to maintain the integrity of the classification task. Additional columns related to player identification, image URLs, and contract metadata were also removed, significantly reducing the dimensionality and potential noise in the data.
-
-After dropping irrelevant columns, rows containing missing values were removed to ensure a complete dataset, resulting in a cleaner and more consistent input frame. Categorical string values such as specific_position, preferred_foot, work_rate, and body_type were standardized and explicitly cast to string types. Special care was taken to filter out players marked as "SUB" (substitute) or "RES" (reserve), since these entries do not reflect a clear on-field role.
-
-To facilitate modeling, player positions were mapped into a controlled set of categories. The specific_position column, which originally contained over 25 detailed FIFA position labels, was consolidated into nine standardized positions: ST, LW, RW, LM, RM, CM, CB, LB, and RB. These were then further grouped into the three broader positional categories of attacker, midfielder, and defender under a new generic_position column. In addition, body types were normalized into four groups: Lean, Normal, Stocky, and Unique, simplifying what was originally a more granular and inconsistent set of labels.
-
-Categorical variables were one-hot encoded to convert them into a numeric format compatible with neural network input. This included preferred_foot, work_rate, and body_type. The specific and generic position labels were also encoded using label encoders to create integer class labels for classification.
-
-Finally, all numeric features, such as player attributes like pace, shooting, strength, and value, were standardized using StandardScaler to ensure that they shared a common scale. This step is especially important for neural networks, which are sensitive to the magnitude of input values. Boolean fields were converted to binary integers to ensure compatibility during model training. By the end of this pipeline, the dataset was fully numeric, clean, and appropriately structured for training multi-class classification models.
 
 
-# Final Input Format:
 
-The final dataset used for training the neural network models consists of 57 input features, capturing both player characteristics and in-game performance statistics. These include biometric data, technical and physical attributes, financial metrics, and one-hot encoded categorical variables such as preferred foot, work rate, and body type. The dataset also includes encoded versions of the specific and generic positional labels, which serve as the target variables for the multi-class classification tasks.
-
-The final features and a short description of each can be found below:
-
-
-| **Index** | **Feature Name**                  | **Description**                                                                 |
-|-----------|-----------------------------------|---------------------------------------------------------------------------------|
-| 1         | overall                           | Overall rating representing player quality                                     |
-| 2         | value_eur                         | Estimated market value in euros                                                |
-| 3         | wage_eur                          | Weekly wage in euros                                                           |
-| 4         | age                               | Player's age in years                                                          |
-| 5         | height_cm                         | Player's height in centimeters                                                 |
-| 6         | weight_kg                         | Player's weight in kilograms                                                   |
-| 7         | weak_foot                         | Rating (1–5) of the player's ability with non-dominant foot                    |
-| 8         | skill_moves                       | Rating (1–5) of the player's special skill move ability                        |
-| 9         | pace                              | Overall pace rating (acceleration + sprint speed)                              |
-| 10        | shooting                          | Overall shooting rating                                                        |
-| 11        | passing                           | Overall passing rating                                                         |
-| 12        | dribbling                         | Overall dribbling rating                                                       |
-| 13        | defending                         | Overall defending rating                                                       |
-| 14        | physic                            | Overall physical ability rating                                                |
-| 15        | attacking_crossing                | Ability to cross the ball                                                      |
-| 16        | attacking_finishing               | Ability to finish scoring chances                                              |
-| 17        | attacking_heading_accuracy        | Heading accuracy during attacks                                                |
-| 18        | attacking_short_passing           | Accuracy and effectiveness of short passes                                     |
-| 19        | attacking_volleys                 | Accuracy and technique when volleying                                          |
-| 20        | skill_dribbling                   | Technical dribbling ability                                                    |
-| 21        | skill_curve                       | Ability to curve the ball                                                      |
-| 22        | skill_fk_accuracy                 | Accuracy when taking free kicks                                                |
-| 23        | skill_long_passing                | Accuracy and effectiveness of long passes                                      |
-| 24        | skill_ball_control                | Ball control under pressure                                                    |
-| 25        | movement_acceleration             | Quickness from a standstill                                                    |
-| 26        | movement_sprint_speed             | Top sprint speed                                                               |
-| 27        | movement_agility                  | Ability to turn and change direction quickly                                   |
-| 28        | movement_reactions                | Speed of reaction to gameplay situations                                       |
-| 29        | movement_balance                  | Ability to stay balanced under pressure                                        |
-| 30        | power_shot_power                  | Power behind shots                                                             |
-| 31        | power_jumping                     | Jumping ability                                                                |
-| 32        | power_stamina                     | Ability to sustain high performance over time                                  |
-| 33        | power_strength                    | Physical strength in duels                                                     |
-| 34        | power_long_shots                  | Accuracy and power of long-distance shots                                      |
-| 35        | mentality_aggression              | Aggression and intensity in play                                               |
-| 36        | mentality_interceptions           | Ability to read the game and intercept passes                                  |
-| 37        | mentality_positioning             | Attacking positioning without the ball                                         |
-| 38        | mentality_vision                  | Ability to see passing opportunities                                           |
-| 39        | mentality_penalties               | Skill in taking penalty kicks                                                  |
-| 40        | defending_marking_awareness       | Ability to mark and track players defensively                                  |
-| 41        | defending_standing_tackle         | Effectiveness of standing tackles                                              |
-| 42        | defending_sliding_tackle          | Effectiveness of sliding tackles                                               |
-| 43        | preferred_foot_Left               | Binary indicator: player prefers left foot                                     |
-| 44        | preferred_foot_Right              | Binary indicator: player prefers right foot                                    |
-| 45        | work_rate_High/High               | Binary indicator for high attacking and high defensive work rate               |
-| 46        | work_rate_High/Low                | Binary indicator for high attacking and low defensive work rate                |
-| 47        | work_rate_High/Medium             | Binary indicator for high attacking and medium defensive work rate             |
-| 48        | work_rate_Low/High                | Binary indicator for low attacking and high defensive work rate                |
-| 49        | work_rate_Low/Low                 | Binary indicator for low attacking and low defensive work rate                 |
-| 50        | work_rate_Low/Medium              | Binary indicator for low attacking and medium defensive work rate              |
-| 51        | work_rate_Medium/High             | Binary indicator for medium attacking and high defensive work rate             |
-| 52        | work_rate_Medium/Low              | Binary indicator for medium attacking and low defensive work rate              |
-| 53        | work_rate_Medium/Medium           | Binary indicator for medium attacking and medium defensive work rate           |
-| 54        | body_type_Lean                    | Binary indicator: lean body type                                               |
-| 55        | body_type_Normal                  | Binary indicator: normal body type                                             |
-| 56        | body_type_Stocky                  | Binary indicator: stocky body type                                             |
-| 57        | body_type_Unique                  | Binary indicator: unique body type (e.g., custom model)                        |
+# Network Creation
